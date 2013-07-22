@@ -30,10 +30,9 @@
 #include "req_wrap.h"
 #include "tree.h"
 #include "uv.h"
-
 #include "util.h"
-
-#if defined(__OpenBSD__) || defined(__MINGW32__) || defined(_MSC_VER)
+#if defined(__OpenBSD__) || defined(__MINGW32__) \
+     || defined(_MSC_VER) || defined(__ANDROID__)
 # include <nameser.h>
 #else
 # include <arpa/nameser.h>

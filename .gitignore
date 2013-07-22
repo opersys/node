@@ -18,6 +18,7 @@ node_g
 icu_config.gypi
 
 /out
+/android-toolchain/
 
 # various stuff that VC++ produces/uses
 Debug/
