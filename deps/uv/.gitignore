@@ -17,6 +17,7 @@ vgcore.*
 
 /out/
 /build/gyp
+/android-toolchain/
 
 /run-tests
 /run-tests.exe
