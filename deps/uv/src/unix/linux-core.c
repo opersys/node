@@ -36,7 +36,9 @@
 #include <fcntl.h>
 #include <time.h>
 
+#ifndef __ANDROID__
 #define HAVE_IFADDRS_H 1
+#endif
 #ifdef __UCLIBC__
 # if __UCLIBC_MAJOR__ < 0 || __UCLIBC_MINOR__ < 9 || __UCLIBC_SUBLEVEL__ < 32
 #  undef HAVE_IFADDRS_H
