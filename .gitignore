@@ -17,6 +17,7 @@ node_g
 /.cproject
 
 /out
+/android-toolchain/
 
 # various stuff that VC++ produces/uses
 Debug/

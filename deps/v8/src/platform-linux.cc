@@ -1200,7 +1200,7 @@ class SignalSender : public Thread {
   void SendProfilingSignal(int tid) {
     if (!signal_handler_installed_) return;
     // Glibc doesn't provide a wrapper for tgkill(2).
-#if defined(ANDROID)
+#if defined(__ANDROID__)
     syscall(__NR_tgkill, vm_tgid_, tid, SIGPROF);
 #else
     syscall(SYS_tgkill, vm_tgid_, tid, SIGPROF);
@@ -1212,7 +1212,7 @@ class SignalSender : public Thread {
     // occuring during signal delivery.
     useconds_t interval = interval_ * 1000 - 100;
     if (full_or_half == HALF_INTERVAL) interval /= 2;
-#if defined(ANDROID)
+#if defined(__ANDROID__)
     usleep(interval);
 #else
     int result = usleep(interval);
