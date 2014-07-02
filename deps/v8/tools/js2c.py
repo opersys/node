@@ -33,7 +33,6 @@
 
 import os, re, sys, string
 import jsmin
-import bz2
 
 
 def ToCAsciiArray(lines):
