@@ -24,6 +24,9 @@
           ['OS not in "solaris android"', {
             'cflags': [ '-pthread' ],
           }],
+          ['OS == "android"', {
+             'defines': [ '__ANDROID__' ]
+          }]
         ],
       }],
     ],
@@ -52,7 +55,7 @@
           }],
           ['OS == "linux"', {
             'defines': [ '_POSIX_C_SOURCE=200112' ],
-          }],
+          }]
         ],
       },
       'defines': [
