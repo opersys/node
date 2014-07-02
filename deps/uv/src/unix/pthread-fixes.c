@@ -30,6 +30,25 @@
 */
 
 
+/* Android versions < 4.1 have a broken pthread_sigmask.
+ * Note that this block of code must come before any inclusion of
+ * pthread-fixes.h so that the real pthread_sigmask can be referenced.
+ **/
+#include <errno.h>
+#include <pthread.h>
+
+#ifdef __ANDROID__
+
+int uv__pthread_sigmask(int how, const sigset_t* set, sigset_t* oset) {
+  static int workaround;
+
+  /* Conservatively remove all calls to pthread_sigprocmask since
+     a single call of it makes node.js crash. */
+  return sigprocmask(how, set, oset);
+}
+
+#endif // __ANDROID__
+
 /*Android doesn't provide pthread_barrier_t for now.*/
 #ifndef PTHREAD_BARRIER_SERIAL_THREAD
 
