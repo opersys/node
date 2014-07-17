@@ -277,6 +277,11 @@ parser.add_option("--xcode",
     dest="use_xcode",
     help="Generate build files for use with xcode")
 
+parser.add_option("--use-pie",
+    action="store_true",
+    dest="use_pie",
+    help="Compile a PIE executable (Android 4.1.x and up, required for Android L)")
+
 parser.add_option("--tag",
     action="store",
     dest="tag",
@@ -472,6 +477,9 @@ def configure_node(o):
   o['variables']['node_unsafe_optimizations'] = (
     1 if options.unsafe_optimizations else 0)
   o['default_configuration'] = 'Debug' if options.debug else 'Release'
+
+  if options.use_pie:
+    o['variables']['use_pie'] = b(options.use_pie)
 
   host_arch = host_arch_win() if os.name == 'nt' else host_arch_cc()
   target_arch = options.dest_cpu or host_arch

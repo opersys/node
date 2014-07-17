@@ -1,6 +1,10 @@
 {
   'variables': {
     'v8_use_snapshot%': 'true',
+    # Turn off -Werror in V8
+    # See http://codereview.chromium.org/8159015
+    'werror': '',
+    'use_pie%': 'false',
     'node_use_dtrace%': 'false',
     'node_use_etw%': 'false',
     'node_use_perfctr%': 'false',
@@ -146,6 +150,10 @@
       ],
 
       'conditions': [
+	[ 'use_pie=="true"', {
+          'cflags': ['-pie', '-fPIE', '-fPIC'],
+          'ldflags': ['-pie', '-fPIE', '-fPIC']
+	}],
         [ 'node_use_openssl=="true"', {
           'defines': [ 'HAVE_OPENSSL=1' ],
           'sources': [ 'src/node_crypto.cc' ],
