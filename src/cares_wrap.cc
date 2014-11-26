@@ -30,9 +30,9 @@
 #include "req_wrap.h"
 #include "tree.h"
 #include "uv.h"
+#include "util.h"
 
-#if defined(__OpenBSD__) || defined(__MINGW32__) \
-     || defined(_MSC_VER) || defined(__ANDROID__)
+#if defined(__OpenBSD__) || defined(__MINGW32__) || defined(_MSC_VER)
 # include <nameser.h>
 #else
 # include <arpa/nameser.h>
@@ -740,7 +740,7 @@ static Handle<Value> Query(const Arguments& args) {
   // object reference, causing wrap->GetObject() to return undefined.
   Local<Object> object = Local<Object>::New(wrap->GetObject());
 
-  String::Utf8Value name(args[0]);
+  node::Utf8Value name(args[0]);
 
   int r = wrap->Send(*name);
   if (r) {
@@ -769,7 +769,7 @@ static Handle<Value> QueryWithFamily(const Arguments& args) {
   // object reference, causing wrap->GetObject() to return undefined.
   Local<Object> object = Local<Object>::New(wrap->GetObject());
 
-  String::Utf8Value name(args[0]);
+  node::Utf8Value name(args[0]);
   int family = args[1]->Int32Value();
 
   int r = wrap->Send(*name, family);
@@ -899,7 +899,7 @@ static Handle<Value> IsIP(const Arguments& args) {
 static Handle<Value> GetAddrInfo(const Arguments& args) {
   HandleScope scope;
 
-  String::Utf8Value hostname(args[0]);
+  node::Utf8Value hostname(args[0]);
 
   int fam = AF_UNSPEC;
   if (args[1]->IsInt32()) {

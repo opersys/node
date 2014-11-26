@@ -290,7 +290,8 @@ child, and it is no longer possible to send messages.
 The 'disconnect' event will be emitted when there are no messages in the process
 of being received, most likely immediately.
 
-Note that you can also call `process.disconnect()` in the child process.
+Note that you can also call `process.disconnect()` in the child process when the
+child process has any open IPC channels with the parent (i.e `fork()`).
 
 ## child_process.spawn(command, [args], [options])
 
@@ -510,8 +511,8 @@ Runs a command in a shell and buffers the output.
     });
 
 The callback gets the arguments `(error, stdout, stderr)`. On success, `error`
-will be `null`.  On error, `error` will be an instance of `Error` and `err.code`
-will be the exit code of the child process, and `err.signal` will be set to the
+will be `null`.  On error, `error` will be an instance of `Error` and `error.code`
+will be the exit code of the child process, and `error.signal` will be set to the
 signal that terminated the process.
 
 There is a second optional argument to specify several options. The

@@ -162,8 +162,8 @@ which must be a `'binary'` encoded string or a [buffer](buffer.html).
 
 It is a [stream](stream.html) that is both readable and writable.  The
 written data is used to compute the hash.  Once the writable side of
-the stream is ended, use the `read()` method to get the computed hash
-digest.  The legacy `update` and `digest` methods are also supported.
+the stream is ended, use the `read()` method to get the enciphered
+contents.  The legacy `update` and `final` methods are also supported.
 
 ## crypto.createCipheriv(algorithm, key, iv)
 
@@ -384,7 +384,7 @@ then a buffer is returned.
 
 ### diffieHellman.getGenerator([encoding])
 
-Returns the Diffie-Hellman prime in the specified encoding, which can
+Returns the Diffie-Hellman generator in the specified encoding, which can
 be `'binary'`, `'hex'`, or `'base64'`. If no encoding is provided,
 then a buffer is returned.
 
