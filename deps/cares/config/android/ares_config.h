@@ -50,13 +50,13 @@
 #define HAVE_AF_INET6 1
 
 /* Define to 1 if you have the <arpa/inet.h> header file. */
-#define HAVE_ARPA_INET_H 1
+#undef HAVE_ARPA_INET_H
 
 /* Define to 1 if you have the <arpa/nameser_compat.h> header file. */
-//#define HAVE_ARPA_NAMESER_COMPAT_H 1
+#undef HAVE_ARPA_NAMESER_COMPAT_H
 
 /* Define to 1 if you have the <arpa/nameser.h> header file. */
-//#define HAVE_ARPA_NAMESER_H 1
+#undef HAVE_ARPA_NAMESER_H
 
 /* Define to 1 if you have the <assert.h> header file. */
 #define HAVE_ASSERT_H 1
