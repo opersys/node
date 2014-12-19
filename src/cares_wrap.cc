@@ -31,13 +31,19 @@
 #include "tree.h"
 #include "uv.h"
 #include "util.h"
-#if defined(__OpenBSD__) || defined(__MINGW32__) \
-     || defined(_MSC_VER) || defined(__ANDROID__)
+
+/* The version of nameser.h provided in Android doesn't contain
+   anything of value. Make sure we use the version provided with
+   the node.js sources. */
+#if defined(__ANDROID__)
+#include "nameser.h"
+#endif
+
+#if defined(__OpenBSD__) || defined(__MINGW32__) || defined(_MSC_VER)
 # include <nameser.h>
 #else
 # include <arpa/nameser.h>
 #endif
-
 
 namespace node {
 
