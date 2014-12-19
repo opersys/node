@@ -1,20 +1,41 @@
 #!/bin/bash
 
-export TOOLCHAIN=$PWD/android-toolchain
-mkdir -p $TOOLCHAIN
+ARCH=arm
+
+[ ! -z "$2" ] && ARCH=$2
+
+if [ "$ARCH" = "arm" ]; then
+    export TOOLCHAIN=arm-linux-androideabi-4.8
+    export TOOLCHAIN_PREFIX=arm-linux-androideabi
+    export TOOLCHAIN_ARCH=arm
+elif [ "$ARCH" = "ia32" ]; then
+    export TOOLCHAIN=x86-4.8
+    export TOOLCHAIN_PREFIX=i686-linux-android
+    export TOOLCHAIN_ARCH=x86
+fi
+
+if [ -z "TOOLCHAIN" ]; then
+    echo "Unknown architecture: $2, it's either ARM or ia32"
+    exit 1
+fi
+
+export TOOLCHAIN_DIR=$PWD/android-toolchain
+mkdir -p $TOOLCHAIN_DIR
 $1/build/tools/make-standalone-toolchain.sh \
-    --toolchain=arm-linux-androideabi-4.8 \
-    --arch=arm \
-    --install-dir=$TOOLCHAIN \
+    --toolchain=$TOOLCHAIN \
+    --arch=$TOOLCHAIN_ARCH \
+    --install-dir=$TOOLCHAIN_DIR \
     --platform=android-9 \
     --system=linux-x86_64
-export PATH=$TOOLCHAIN/bin:$PATH
-export AR=arm-linux-androideabi-ar
-export CC=arm-linux-androideabi-gcc
-export CXX=arm-linux-androideabi-g++
-export LINK=arm-linux-androideabi-g++
+export PATH=$TOOLCHAIN_DIR/bin:$PATH
+export AR=${TOOLCHAIN_PREFIX}-ar
+export AS=${TOOLCHAIN_PREFIX}-as
+export CC=${TOOLCHAIN_PREFIX}-gcc
+export CXX=${TOOLCHAIN_PREFIX}-g++
+export LINK=${TOOLCHAIN_PREFIX}-g++
 
 ./configure \
     --without-snapshot \
-    --dest-cpu=arm \
-    --dest-os=android 
+    --dest-cpu=$ARCH \
+    --dest-os=android \
+    --use-pie
