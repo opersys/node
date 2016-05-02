@@ -70,7 +70,6 @@
 	  'dependencies': [
 		'node_js2c#host',
 	  ],
-
 	  'include_dirs': [
 		'src',
 		'tools/msvs/genfiles',
@@ -148,8 +147,8 @@
 	  ],
       'conditions': [
 	[ 'use_pie=="true"', {
-          'cflags': ['-pie', '-fPIE', '-fPIC'],
-          'ldflags': ['-pie', '-fPIE', '-fPIC']
+		  'cflags': ['-pie', '-fPIE', '-fPIC'],
+		  'ldflags': ['-pie', '-fPIE', '-fPIC']
 	}],
         [ 'node_use_openssl=="true"', {
           'defines': [ 'HAVE_OPENSSL=1' ],
