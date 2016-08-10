@@ -25,7 +25,7 @@ $1/build/tools/make-standalone-toolchain.sh \
     --toolchain=$TOOLCHAIN \
     --arch=$TOOLCHAIN_ARCH \
     --install-dir=$TOOLCHAIN_DIR \
-    --platform=android-21 \
+    --platform=android-15 \
     --system=linux-x86_64
 export PATH=$TOOLCHAIN_DIR/bin:$PATH
 export AR=${TOOLCHAIN_PREFIX}-ar

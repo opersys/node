@@ -91,7 +91,6 @@ typedef enum __ns_type {
     ns_t_max = 65536
 } ns_type;
 
-#if !defined(__ANDROID__)
 typedef enum __ns_opcode {
     ns_o_query = 0,         /* Standard query. */
     ns_o_iquery = 1,        /* Inverse query (deprecated/unsupported). */
@@ -101,7 +100,6 @@ typedef enum __ns_opcode {
     ns_o_update = 5,        /* Zone update message. */
     ns_o_max = 6
 } ns_opcode;
-#endif // __ANDROID__
 
 typedef enum __ns_rcode {
     ns_r_noerror = 0,       /* No error occurred. */
